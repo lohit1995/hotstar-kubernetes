@@ -4,9 +4,7 @@ pipeline{
         jdk 'jdk21'
         nodejs 'node'
     }
-    environment {
-        SCANNER_HOME=tool 'sonar-scanner'
-    }
+   
     stages {
         stage('clean workspace'){
             steps{
@@ -15,7 +13,8 @@ pipeline{
         }
         stage('Checkout from Git'){
             steps{
-                git branch: 'main', ', url: 
+                 git branch: 'main',
+                    url: 'https://github.com/lohit1995/hotstar-kubernetes.git'
             }
         }
        
