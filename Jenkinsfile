@@ -2,6 +2,7 @@ pipeline{
     agent any
     tools{
         jdk 'jdk21'
+        nodejs 'nodejs'
     
     }
    
@@ -39,9 +40,12 @@ pipeline{
             }
         }
        
-        stage('Deploy to container'){
-            steps{
-                sh 'docker run -d --name hotstar -p 3000:3000 lohitpunit/hotstar:latest'
+        stage('Deploy to EKS') {
+            steps {
+                sh '''
+                kubectl rollout restart deployment/hotstar-deployment
+                kubectl rollout status deployment/hotstar-deployment
+                '''
             }
         }
 
